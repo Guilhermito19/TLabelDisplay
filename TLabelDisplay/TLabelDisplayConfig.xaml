@@ -1,0 +1,53 @@
+<UserControl x:Class="T.Portable.Controls.TLabelDisplayConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ttw="clr-namespace:T.Toolkit.Wpf;assembly=T.Toolkit.Wpf"
+             Loaded="UserControl_Loaded">
+
+    <!--
+        Este UserControl é o painel de configuração que o SCADA abre
+        no designer quando o usuário clica no componente e acessa suas propriedades.
+
+        Ele implementa IControlConfig, que exige:
+          - LoadControl(object control) → recebe a instância do TLabelDisplay
+          - OnOK()                      → aplica as alterações ao componente
+    -->
+
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>  <!-- LinkedValue -->
+            <RowDefinition Height="32"/>  <!-- Prefix      -->
+            <RowDefinition Height="32"/>  <!-- Suffix      -->
+            <RowDefinition Height="*"/>   <!-- espaço      -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="2*" MinWidth="150" MaxWidth="400"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- LinkedValue: campo de tag/expressão do SCADA -->
+        <Label Content="Tag/Expressão:" Grid.Row="0" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <!--
+            FieldEditor é um controle do SCADA que entende expressões e tags.
+            O EditInfo define o tipo de dado esperado (aqui: string com expressões).
+        -->
+        <ttw:FieldEditor x:Name="Editor_LinkedValue" Grid.Row="0" Grid.Column="1"
+                         VerticalAlignment="Center"/>
+
+        <!-- Prefix -->
+        <Label Content="Prefixo:" Grid.Row="1" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="Editor_Prefix" Grid.Row="1" Grid.Column="1"
+                 VerticalAlignment="Center"/>
+
+        <!-- Suffix -->
+        <Label Content="Sufixo:" Grid.Row="2" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="Editor_Suffix" Grid.Row="2" Grid.Column="1"
+                 VerticalAlignment="Center"/>
+
+    </Grid>
+</UserControl>

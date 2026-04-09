@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  TLabelDisplay.csproj — Projeto WPF (.NET Framework 4.8)
+  ============================================================
+  Este projeto compila o componente para rodar no cliente
+  desktop do SCADA (WPF).
+
+  ESTRUTURA DE PROJETOS PORTABLE:
+    TLabelDisplay/          → este projeto (WPF, .NET 4.8)
+    TLabelDisplay.HTML5/    → projeto irmão (OpenSilver, .NET Standard 2.0)
+
+  O arquivo TLabelDisplay.cs é COMPARTILHADO entre os dois projetos.
+  O projeto HTML5 referencia o .cs deste projeto via <Compile Link="...">.
+  ============================================================
+-->
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-0001-0001-0001-000000000001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <!-- Namespace e nome do assembly devem ser iguais nos dois projetos -->
+    <RootNamespace>T.Portable.Controls</RootNamespace>
+    <AssemblyName>T.Portable.Controls.TLabelDisplay</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <!-- Saída vai direto para a pasta de controles WPF do SCADA -->
+    <OutputPath>..\..\..\..\FactoryStudio\bin\WpfControls\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Referências WPF padrão -->
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="T.Library">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="T.Library.Wpf">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Library.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="T.Toolkit">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="T.Toolkit.Wpf">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Toolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="T.Wpf">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <!-- Referências das DLLs do SCADA (ajuste os caminhos conforme sua instalação) -->
+  <!-- Arquivos do projeto -->
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <!-- Arquivo principal do componente (compartilhado com HTML5) -->
+    <Compile Include="TLabelDisplay.cs" />
+    <!-- Config: o .xaml.cs depende do .xaml -->
+    <Compile Include="TLabelDisplayConfig.xaml.cs">
+      <DependentUpon>TLabelDisplayConfig.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XAML do painel de configuração -->
+  <ItemGroup>
+    <Page Include="TLabelDisplayConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <!-- Ícone do componente na toolbox -->
+  <ItemGroup>
+    <Resource Include="TLabelDisplay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NETX\an-10\T.Wpf.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

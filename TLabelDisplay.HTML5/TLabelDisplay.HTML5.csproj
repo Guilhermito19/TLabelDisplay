@@ -1,0 +1,68 @@
+<!--
+  ============================================================
+  TLabelDisplay.HTML5.csproj — Projeto OpenSilver (.NET Standard 2.0)
+  ============================================================
+  Este projeto compila o mesmo componente para rodar no browser
+  (versão HTML5 do SCADA via OpenSilver).
+
+  PONTO-CHAVE: o TLabelDisplay.cs NÃO está duplicado aqui.
+  Ele é referenciado com <Compile Link="..."> apontando para
+  o arquivo original no projeto WPF. O compilador usa a mesma
+  fonte, mas com OPENSILVER definido como símbolo de compilação,
+  ativando os blocos #if OPENSILVER do código.
+  ============================================================
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <OutputPath>bin\</OutputPath>
+
+    <!-- Mesmo namespace e nome de assembly que o projeto WPF -->
+    <RootNamespace>T.Portable.Controls</RootNamespace>
+    <AssemblyName>T.Portable.Controls.TLabelDisplay</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Link="..." = o arquivo aparece no projeto como se estivesse aqui,
+      mas fisicamente continua no projeto WPF. Mesma fonte, dois compiladores.
+    -->
+    <Compile Include="..\TLabelDisplay\TLabelDisplay.cs" Link="TLabelDisplay.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OpenSilver: framework que transpila C#/XAML para HTML5/WebAssembly -->
+    <PackageReference Include="OpenSilver" Version="3.3.0-preview-2025-05-02-130810-ce7cf90e">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="T.Library">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="T.Toolkit">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NetX\an-10\T.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Referências das DLLs do SCADA (versão HTML5) -->
+
+  <!--
+    Pós-build: copia o assembly compilado para a pasta de controles HTML5 do SCADA.
+    O SCADA carrega automaticamente DLLs dessa pasta na inicialização.
+  -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!--<Exec Command="copy bin\$(AssemblyName).dll C:\Program Files (x86)\SPIN\Action.NetX\an-10\HTML5\ExtensionControls\$(AssemblyName).dll" />-->
+    <!--<Exec Command="copy bin\$(AssemblyName).dll ..\..\..\..\FactoryStudio\bin\HTML5\ExtensionControls\$(AssemblyName).dll" />-->
+  </Target>
+
+</Project>

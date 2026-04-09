@@ -1,0 +1,2 @@
+Message: ExecuteInvoke :: Exception: Uma exceção foi acionada pelo destino de uma chamada., Service: T.Library.AdoAPI, Method: GetDataTable, StreamLen: 58, Memory: 48224 K, HandleCount: 362 [09/04/2026 16:26:34.288]
+Message: ExecuteInvoke :: Exception: Uma exceção foi acionada pelo destino de uma chamada., Service: T.Library.AdoAPI, Method: GetDataTable, StreamLen: 58, Memory: 48144 K, HandleCount: 362 [09/04/2026 17:22:34.908]

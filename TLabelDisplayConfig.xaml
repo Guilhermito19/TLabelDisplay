@@ -1,0 +1,55 @@
+<UserControl x:Class="T.Portable.Controls.TLabelDisplayConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ttw="clr-namespace:T.Toolkit.Wpf;assembly=T.Toolkit.Wpf"
+             Loaded="UserControl_Loaded">
+
+    <!--
+        Painel de configuração do TLabelDisplay.
+        Aberto pelo SCADA no designer quando o usuário edita as propriedades do componente.
+
+        Fluxo:
+          1. SCADA chama GetConfigControl() → instancia este UserControl
+          2. SCADA chama LoadControl(componenteInstance) → preenche os campos
+          3. Usuário edita e clica OK
+          4. SCADA chama OnOK() → valores são lidos e aplicados de volta ao componente
+
+        NOTA: Este painel NÃO usa binding com o TLabelDisplay —
+        ele lê/escreve as propriedades manualmente no code-behind (LoadControl / OnOK).
+        Isso é intencional: o painel é um formulário de edição pontual, não uma View reativa.
+    -->
+
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>  <!-- LinkedValue -->
+            <RowDefinition Height="32"/>  <!-- Prefix      -->
+            <RowDefinition Height="32"/>  <!-- Suffix      -->
+            <RowDefinition Height="*"/>   <!-- espaço      -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="2*" MinWidth="150" MaxWidth="400"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- LinkedValue -->
+        <Label Content="Tag/Expressão:" Grid.Row="0" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <ttw:FieldEditor x:Name="Editor_LinkedValue" Grid.Row="0" Grid.Column="1"
+                         VerticalAlignment="Center"/>
+
+        <!-- Prefix -->
+        <Label Content="Prefixo:" Grid.Row="1" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="Editor_Prefix" Grid.Row="1" Grid.Column="1"
+                 VerticalAlignment="Center"/>
+
+        <!-- Suffix -->
+        <Label Content="Sufixo:" Grid.Row="2" Grid.Column="0"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="Editor_Suffix" Grid.Row="2" Grid.Column="1"
+                 VerticalAlignment="Center"/>
+
+    </Grid>
+</UserControl>

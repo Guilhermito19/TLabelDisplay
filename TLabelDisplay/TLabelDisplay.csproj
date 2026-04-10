@@ -93,8 +93,5 @@
   <ItemGroup>
     <Resource Include="TLabelDisplay.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\..\..\..\Program Files (x86)\SPIN\Action.NETX\an-10\T.Wpf.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

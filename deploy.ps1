@@ -1,9 +1,9 @@
 try {
 
-$src1 = "C:\Users\Guilhermito\Desktop\PDFVIEWER\TLabelDisplay\TLabelDisplay\obj\Debug\T.Portable.Controls.TLabelDisplay.dll"
+$src1 = "C:\Users\guilherme.tavares\Desktop\TDisplayLabel\TLabelDisplay\TLabelDisplay\obj\Debug\T.Portable.Controls.TLabelDisplay.dll"
 $dst1 = "C:\Program Files (x86)\SPIN\Action.NetX\an-10\WpfControls\T.Portable.Controls.TLabelDisplay.dll"
 
-$src2 = "C:\Users\Guilhermito\Desktop\PDFVIEWER\TLabelDisplay\TLabelDisplay.HTML5\bin\T.Portable.Controls.TLabelDisplay.dll"
+$src2 = "C:\Users\guilherme.tavares\Desktop\TDisplayLabel\TLabelDisplay\TLabelDisplay.HTML5\bin\T.Portable.Controls.TLabelDisplay.dll"
 $dst2 = "C:\Program Files (x86)\SPIN\Action.NetX\an-10\HTML5\ExtensionControls\T.Portable.Controls.TLabelDisplay.dll"
 
 Copy-Item $src1 $dst1 -Force

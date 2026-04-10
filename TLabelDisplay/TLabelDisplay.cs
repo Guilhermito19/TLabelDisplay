@@ -95,20 +95,7 @@ namespace T.Portable.Controls
                 if (this.textBlock == null)
                     return;
 
-#if !OPENSILVER
-                bool? access = Application.Current?.Dispatcher.CheckAccess();
-                if (access == true)
-                {
-                    this.textBlock.Text = value;
-                }
-                else
-                {
-                    Application.Current?.Dispatcher.BeginInvoke(
-                        System.Windows.Threading.DispatcherPriority.Normal,
-                        new Action(() => this.textBlock.Text = value)
-                    );
-                }
-#endif
+                this.textBlock.Text = value;
             }
         }
 
@@ -297,11 +284,14 @@ namespace T.Portable.Controls
                 object val = await this._linkedValueRef.GetValueAsync(false);
                 rawValue = TConvert.ToString(val) ?? "";
             }
+            string finalValue = $"{Prefix}{rawValue}{Suffix}";
 
-#if !OPENSILVER
+#if OPENSILVER
+            DisplayText = finalValue;
+#else
             UpdateUI(() =>
             {
-                this.textBlock.Text = rawValue;
+                DisplayText = finalValue;
             });
 #endif
         }

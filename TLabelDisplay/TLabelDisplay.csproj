@@ -74,9 +74,14 @@
   <!-- Referências das DLLs do SCADA (ajuste os caminhos conforme sua instalação) -->
   <!-- Arquivos do projeto -->
   <ItemGroup>
+    <Compile Include="BackupFilterLayout.xaml.cs">
+      <DependentUpon>BackupFilterLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- Arquivo principal do componente (compartilhado com HTML5) -->
-    <Compile Include="TLabelDisplay.cs" />
+    <Compile Include="TLabelDisplay.xaml.cs">
+      <DependentUpon>TLabelDisplay.xaml</DependentUpon>
+    </Compile>
     <!-- Config: o .xaml.cs depende do .xaml -->
     <Compile Include="TLabelDisplayConfig.xaml.cs">
       <DependentUpon>TLabelDisplayConfig.xaml</DependentUpon>
@@ -84,6 +89,14 @@
   </ItemGroup>
   <!-- XAML do painel de configuração -->
   <ItemGroup>
+    <Page Include="BackupFilterLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TLabelDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TLabelDisplayConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

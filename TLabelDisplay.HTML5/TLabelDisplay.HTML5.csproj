@@ -31,11 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--
-      Link="..." = o arquivo aparece no projeto como se estivesse aqui,
-      mas fisicamente continua no projeto WPF. Mesma fonte, dois compiladores.
-    -->
-    <Compile Include="..\TLabelDisplay\TLabelDisplay.cs" Link="TLabelDisplay.cs" />
+    <Compile Include="..\TLabelDisplay\TLabelDisplay.xaml.cs" Link="TLabelDisplay.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +39,12 @@
     <PackageReference Include="OpenSilver" Version="3.3.0-preview-2025-05-02-130810-ce7cf90e">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\TLabelDisplay\TLabelDisplay.xaml" Link="TLabelDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

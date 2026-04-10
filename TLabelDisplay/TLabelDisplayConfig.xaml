@@ -36,18 +36,5 @@
         -->
         <ttw:FieldEditor x:Name="Editor_LinkedValue" Grid.Row="0" Grid.Column="1"
                          VerticalAlignment="Center"/>
-
-        <!-- Prefix -->
-        <Label Content="Prefixo:" Grid.Row="1" Grid.Column="0"
-               VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="Editor_Prefix" Grid.Row="1" Grid.Column="1"
-                 VerticalAlignment="Center"/>
-
-        <!-- Suffix -->
-        <Label Content="Sufixo:" Grid.Row="2" Grid.Column="0"
-               VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="Editor_Suffix" Grid.Row="2" Grid.Column="1"
-                 VerticalAlignment="Center"/>
-
     </Grid>
 </UserControl>

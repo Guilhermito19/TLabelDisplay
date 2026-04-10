@@ -64,8 +64,6 @@ namespace T.Portable.Controls
 
             // Preenche os campos com os valores atuais do componente
             this.Editor_LinkedValue.Text = this._controlRef.LinkedValue;
-            this.Editor_Prefix.Text      = this._controlRef.Prefix;
-            this.Editor_Suffix.Text      = this._controlRef.Suffix;
         }
 
 
@@ -81,8 +79,6 @@ namespace T.Portable.Controls
             if (this._controlRef == null) return true;
 
             this._controlRef.LinkedValue = this.Editor_LinkedValue.Text;
-            this._controlRef.Prefix      = this.Editor_Prefix.Text;
-            this._controlRef.Suffix      = this.Editor_Suffix.Text;
 
             return true; // true = fecha a janela; false = mantém aberta
         }

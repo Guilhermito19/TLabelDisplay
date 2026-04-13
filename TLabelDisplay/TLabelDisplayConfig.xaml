@@ -16,14 +16,10 @@
     <Grid Margin="0,10,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>  <!-- LinkedValue -->
-            <RowDefinition Height="32"/>  <!-- Prefix      -->
-            <RowDefinition Height="32"/>  <!-- Suffix      -->
             <RowDefinition Height="*"/>   <!-- espaço      -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="2*" MinWidth="150" MaxWidth="400"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 

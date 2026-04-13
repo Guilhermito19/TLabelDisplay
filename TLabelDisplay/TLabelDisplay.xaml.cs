@@ -25,8 +25,6 @@ namespace T.Portable.Controls
     [System.Reflection.ObfuscationAttribute(Feature = "renaming", ApplyToMembers = true)]
     public partial class TLabelDisplay : UserControl, IPortableControl, INotifyPropertyChanged
     {
-        private TextBlock textBlock = null;
-
         private ObjectReference _linkedValueRef = null;
         private string _linkedValue = "";
 
@@ -58,13 +56,11 @@ namespace T.Portable.Controls
 
         public TLabelDisplay()
         {
-            DisplayText = "Inicializado no Constructor";
-
             this.DataContext = this;
 
             this.Content = new TextBlock
             {
-                Text = "Component"
+                Text = "Label Display"
             };
         }
 
@@ -83,30 +79,13 @@ namespace T.Portable.Controls
                     this._linkedValueRef.RegisterEvent(this.HandleTagEvent);
 
                 ObjectReference.AddEventToExecute(this.HandleTagEvent);
-                Console.WriteLine("Passando pelo RunTime");
-#if OPENSILVER
-                UpdateUIHTML(() => { InitializeObjectsFromXaml(); });
-#else
-                InitializeObjectsFromXaml();
-#endif
+
+                InitializeComponent();
             }
             catch (Exception ex)
             {
                 TException.Log(ex);
             }
-        }
-
-        public void InitializeObjectsFromXaml()
-        {
-            //InitializeComponent()
-            if (_contentLoaded)
-            {
-                return;
-            }
-            Console.WriteLine("InitializeObjectsFromXaml");
-            _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/T.Portable.Controls.TLabelDisplay;component/tlabeldisplay.xaml", System.UriKind.Relative);
-            System.Windows.Application.LoadComponent(this, resourceLocater);
         }
 
         public async Task HandleTagEvent()
@@ -121,10 +100,7 @@ namespace T.Portable.Controls
             string finalValue = $"{rawValue}";
 
 #if OPENSILVER
-            UpdateUIHTML(() =>
-            {
-                DisplayText = finalValue;
-            });
+            DisplayText = finalValue;
 #else
             UpdateUI(() =>
             {
@@ -133,8 +109,6 @@ namespace T.Portable.Controls
 #endif
         }
 
-
-
 #if !OPENSILVER
         public void UpdateUI(Action action)
         {
@@ -142,14 +116,7 @@ namespace T.Portable.Controls
         }
 #endif
 
-#if OPENSILVER
-        public void UpdateUIHTML(Action action)
-        {
-            Dispatcher.InvokeAsync(action);
-        }
-#endif
-
-        #region Stuff
+        #region Other Stuff
         // =====================================================================
         // INotifyPropertyChanged
         // Necessário para que o SCADA consiga observar mudanças de propriedades
@@ -159,34 +126,6 @@ namespace T.Portable.Controls
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        // --- FontSize da propriedade ---
-        // Sobrescreve a propriedade herdada para também aplicar no TextBlock interno
-        private double _fontSize = 14;
-        public new double FontSize
-        {
-            get => _fontSize;
-            set
-            {
-                _fontSize = value;
-                if (this.textBlock != null)
-                    this.textBlock.FontSize = value;
-            }
-        }
-
-        // --- TextColor ---
-        // Cor do texto exibido
-        private Brush _textColor = new SolidColorBrush(Colors.Black);
-        public Brush TextColor
-        {
-            get => _textColor;
-            set
-            {
-                _textColor = value;
-                if (this.textBlock != null)
-                    this.textBlock.Foreground = value;
-            }
         }
 
         public string[] ControlDataCSS;

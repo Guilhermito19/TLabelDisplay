@@ -62,9 +62,11 @@
     Pós-build: copia o assembly compilado para a pasta de controles HTML5 do SCADA.
     O SCADA carrega automaticamente DLLs dessa pasta na inicialização.
   -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <!--<Exec Command="copy bin\$(AssemblyName).dll C:\Program Files (x86)\SPIN\Action.NetX\an-10\HTML5\ExtensionControls\$(AssemblyName).dll" />-->
-    <!--<Exec Command="copy bin\$(AssemblyName).dll ..\..\..\..\FactoryStudio\bin\HTML5\ExtensionControls\$(AssemblyName).dll" />-->
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll"
+			  DestinationFiles="C:\Program Files (x86)\SPIN\Action.NetX\an-10\HTML5\ExtensionControls\$(AssemblyName).dll"
+			  OverwriteReadOnlyFiles="true" />
+		<Message Text="✔ HTML5 DLL copiada para ExtensionControls" Importance="high" />
+	</Target>
 
 </Project>
